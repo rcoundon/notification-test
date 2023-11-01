@@ -16,12 +16,13 @@ app.mount('#app')
 
 function randomNotification() {
   const notifTitle = 'Title of the notification'
-  const notifBody = `Body of th enotification`;
+  const notifBody = `Body of the notification`;
 
   const options = {
     body: notifBody,
   };
   new Notification(notifTitle, options);
+  setInterval(randomNotification, 20000);
 }
 
 Notification.requestPermission().then((result) => {
@@ -29,8 +30,3 @@ Notification.requestPermission().then((result) => {
     randomNotification();
   }
 });
-
-
-setTimeout(() => {
-  randomNotification()
-}, 10000)
