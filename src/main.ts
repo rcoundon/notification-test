@@ -12,13 +12,18 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+let notification: Notification | undefined;
 
 function randomNotification() {
   console.log('Show random notification');
   navigator.serviceWorker.ready
-    .then((registration) => {
+    .then(async (registration) => {
       console.log('show sw notification');
-      registration.showNotification("Vibration Sample", {
+      const notifications = await registration.getNotifications();
+      notifications.forEach(notification => {
+        notification.close();
+      })
+      await registration.showNotification("Vibration Sample", {
         body: "Buzz! Buzz!",
         vibrate: [200, 100, 200, 100, 200, 100, 200],
         tag: "vibration-sample",
@@ -28,7 +33,8 @@ function randomNotification() {
       })
   });
   console.log('show regular notification');
-  const notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
+  if(notification) notification.close();
+  notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
 }
 
 let interval;
