@@ -27,6 +27,12 @@ function randomNotification() {
 
 Notification.requestPermission().then((result) => {
   if (result === "granted") {
-    randomNotification();
+    navigator.serviceWorker.ready.then((registration) => {
+      registration.showNotification("Vibration Sample", {
+        body: "Buzz! Buzz!",
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        tag: "vibration-sample",
+      });
+    });
   }
 });
