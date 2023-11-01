@@ -24,7 +24,6 @@ function randomNotification() {
   });
 
   const notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
-
 }
 
 let interval;
@@ -32,12 +31,10 @@ let interval;
 Notification.requestPermission().then((result) => {
   if (result === "granted") {
     randomNotification();
-    interval = setInterval(randomNotification, 20000);
+    interval = setInterval(randomNotification, 10000);
   }
 });
 
 if(!interval){
-  if(Notification.permission === 'granted'){
-    interval = setInterval(randomNotification, 20000);
-  }
+    interval = setInterval(randomNotification, 10000);
 }
