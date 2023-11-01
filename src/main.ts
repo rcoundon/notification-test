@@ -14,6 +14,7 @@ app.use(router)
 app.mount('#app')
 
 function randomNotification() {
+
   navigator.serviceWorker.ready.then((registration) => {
     registration.showNotification("Vibration Sample", {
       body: "Buzz! Buzz!",
@@ -21,6 +22,9 @@ function randomNotification() {
       tag: "vibration-sample",
     });
   });
+
+  const notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
+
 }
 
 let interval;
