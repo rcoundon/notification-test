@@ -15,12 +15,16 @@ app.mount('#app')
 
 function randomNotification() {
 
-  navigator.serviceWorker.ready.then((registration) => {
-    registration.showNotification("Vibration Sample", {
-      body: "Buzz! Buzz!",
-      vibrate: [200, 100, 200, 100, 200, 100, 200],
-      tag: "vibration-sample",
-    });
+  navigator.serviceWorker.ready
+    .then((registration) => {
+      registration.showNotification("Vibration Sample", {
+        body: "Buzz! Buzz!",
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        tag: "vibration-sample",
+      })
+    .catch((error) => {
+        console.log(error);
+      })
   });
 
   const notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
