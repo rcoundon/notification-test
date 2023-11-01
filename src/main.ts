@@ -13,7 +13,6 @@ app.use(router)
 
 app.mount('#app')
 
-
 function randomNotification() {
   navigator.serviceWorker.ready.then((registration) => {
     registration.showNotification("Vibration Sample", {
@@ -22,11 +21,19 @@ function randomNotification() {
       tag: "vibration-sample",
     });
   });
-  setInterval(randomNotification, 20000);
 }
+
+let interval;
 
 Notification.requestPermission().then((result) => {
   if (result === "granted") {
     randomNotification();
+    interval = setInterval(randomNotification, 20000);
   }
 });
+
+if(!interval){
+  if(Notification.permission === 'granted'){
+    interval = setInterval(randomNotification, 20000);
+  }
+}
