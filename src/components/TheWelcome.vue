@@ -10,9 +10,6 @@ function requestNotificationPermission() {
   }
 }
 
-const notificationPermission = computed(() => {
-  return Notification.permission === 'granted'
-});
 
 
 </script>
@@ -21,7 +18,7 @@ const notificationPermission = computed(() => {
   <div class="greetings">
     Hello!
     <h3>
-      <button v-if="!notificationPermission" @click="requestNotificationPermission">Keep me up-to-date</button>
+      <button @click="requestNotificationPermission">Keep me up-to-date</button>
     </h3>
   </div>
 </template>
