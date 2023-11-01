@@ -26,9 +26,10 @@ function randomNotification() {
   if(notification) notification.close();
   notification = new Notification("Hello!", { body:  "Buzz! Buzz!" });
 }
-function requestNotificationPermission() {
 
-  let interval;
+let interval;
+function requestNotificationPermission() {
+  console.log('request notification permission');
 
   Notification.requestPermission().then((result) => {
     if (result === "granted") {
