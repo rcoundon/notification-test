@@ -15,24 +15,18 @@ app.mount('#app')
 
 
 function randomNotification() {
-  const notifTitle = 'Title of the notification'
-  const notifBody = `Body of the notification`;
-
-  const options = {
-    body: notifBody,
-  };
-  new Notification(notifTitle, options);
+  navigator.serviceWorker.ready.then((registration) => {
+    registration.showNotification("Vibration Sample", {
+      body: "Buzz! Buzz!",
+      vibrate: [200, 100, 200, 100, 200, 100, 200],
+      tag: "vibration-sample",
+    });
+  });
   setInterval(randomNotification, 20000);
 }
 
 Notification.requestPermission().then((result) => {
   if (result === "granted") {
-    navigator.serviceWorker.ready.then((registration) => {
-      registration.showNotification("Vibration Sample", {
-        body: "Buzz! Buzz!",
-        vibrate: [200, 100, 200, 100, 200, 100, 200],
-        tag: "vibration-sample",
-      });
-    });
+    randomNotification();
   }
 });
