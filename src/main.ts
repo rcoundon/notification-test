@@ -37,11 +37,11 @@ Notification.requestPermission().then((result) => {
   if (result === "granted") {
     console.log('permission granted');
     randomNotification();
-    interval = setInterval(randomNotification, 10000);
+    interval = setTimeout(randomNotification, 10000);
   }
 });
 
 if(!interval){
   console.log('no interval');
-  interval = setInterval(randomNotification, 10000);
+  interval = setTimeout(randomNotification, 10000);
 }
