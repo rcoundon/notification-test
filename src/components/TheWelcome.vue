@@ -3,11 +3,9 @@
 import { computed } from 'vue';
 
 function requestNotificationPermission() {
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  } else {
+
     Notification.requestPermission();
-  }
+
 }
 
 
